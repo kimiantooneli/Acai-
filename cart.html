@@ -4,23 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keranjang - Acai Bowl Store</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root { --primary: #9b59b6; --primary-light: #f3e8f9; --bg-soft: #fcf8ff; --white: #ffffff; --text: #333; --danger: #e74c3c; --shadow: 0 4px 15px rgba(155, 89, 182, 0.12); }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background-color: var(--bg-soft); color: var(--text); padding-bottom: 40px; }
+    .navbar { background: var(--white); box-shadow: var(--shadow); padding: 15px; position: sticky; top: 0; }
+    .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .brand { color: var(--primary); font-size: 1.3rem; font-weight: bold; text-decoration: none; }
+    .container { max-width: 1000px; margin: 20px auto; padding: 15px; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 20px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--primary-light); font-size: 0.9rem; }
+    th { background: var(--primary-light); color: var(--primary); }
+    .btn-danger { background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+    .checkout-box { background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; }
+    .btn-checkout { background: var(--primary); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; }
+  </style>
 </head>
 <body>
   <nav class="navbar">
-    <div class="container nav-container">
-      <div class="brand-title" style="margin:0;">🍓 Acai Bowl Store</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="cart.html" class="active">Keranjang</a></li>
-        <li><a href="#" onclick="logout()" style="color: var(--danger);">Logout</a></li>
-      </ul>
+    <div class="nav-container">
+      <a href="index.html" class="brand">🍓 Acai Bowl Store</a>
+      <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:bold;">← Kembali Belanja</a>
     </div>
   </nav>
 
   <div class="container">
-    <h2 style="margin-bottom: 20px;">Keranjang Belanja</h2>
-    <div class="table-responsive">
+    <h2 style="margin-bottom: 15px; color:var(--primary);">🛒 Keranjang Belanja</h2>
+    <div style="overflow-x: auto;">
       <table>
         <thead>
           <tr>
@@ -31,20 +41,66 @@
             <th>Aksi</th>
           </tr>
         </thead>
-        <tbody id="cartItems">
-          <!-- Item Keranjang -->
-        </tbody>
+        <tbody id="cartTable"></tbody>
       </table>
     </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: center; background: var(--white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow);">
-      <h3>Total: <span id="cartTotal" style="color: var(--primary);">Rp 0</span></h3>
-      <a href="checkout.html" class="btn btn-primary" style="width: auto; padding: 12px 30px;">Checkout</a>
+    <div class="checkout-box">
+      <h3>Total: <span id="totalPrice" style="color: var(--primary);">Rp 0</span></h3>
+      <a href="checkout.html" class="btn-checkout">Checkout</a>
     </div>
   </div>
 
-  <script src="js/product.js"></script>
-  <script src="js/login.js"></script>
-  <script src="js/cart.js"></script>
+  <script>
+    function formatRupiah(num) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+    }
+
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
+      const tbody = document.getElementById('cartTable');
+      let total = 0;
+      tbody.innerHTML = '';
+
+      if(cart.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Keranjang kosong</td></tr>';
+        document.getElementById('totalPrice').textContent = formatRupiah(0);
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const sub = item.price * item.qty;
+        total += sub;
+        tbody.innerHTML += `
+          <tr>
+            <td><b>${item.name}</b></td>
+            <td>${formatRupiah(item.price)}</td>
+            <td><input type="number" value="${item.qty}" min="1" onchange="updateQty(${index}, this.value)" style="width:50px; padding:4px;"></td>
+            <td>${formatRupiah(sub)}</td>
+            <td><button class="btn-danger" onclick="removeItem(${index})">Hapus</button></td>
+          </tr>
+        `;
+      });
+      document.getElementById('totalPrice').textContent = formatRupiah(total);
+    }
+
+    function updateQty(idx, qty) {
+      let cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
+      if(qty > 0) {
+        cart[idx].qty = parseInt(qty);
+        localStorage.setItem('acai_cart', JSON.stringify(cart));
+        renderCart();
+      }
+    }
+
+    function removeItem(idx) {
+      let cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
+      cart.splice(idx, 1);
+      localStorage.setItem('acai_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
 </body>
   </html>
