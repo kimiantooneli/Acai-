@@ -3,50 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Penjual - Acai Bowl Store</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Seller Dashboard - Acai Bowl Store</title>
+  <style>
+    :root { --primary: #9b59b6; --primary-light: #f3e8f9; --bg-soft: #fcf8ff; --white: #ffffff; --shadow: 0 4px 15px rgba(155, 89, 182, 0.12); }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background: var(--bg-soft); padding-bottom: 30px; }
+    .navbar { background: white; padding: 15px; box-shadow: var(--shadow); }
+    .container { max-width: 900px; margin: 20px auto; padding: 15px; }
+    .btn { background: var(--primary); color: white; padding: 10px 15px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-top: 15px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--primary-light); }
+    th { background: var(--primary-light); color: var(--primary); }
+  </style>
 </head>
 <body>
   <nav class="navbar">
-    <div class="container nav-container">
-      <div class="brand-title" style="margin:0;">🏪 Penjual Dashboard</div>
-      <ul class="nav-links">
-        <li><a href="seller.html" class="active">Daftar Produk</a></li>
-        <li><a href="add-product.html">Tambah Produk</a></li>
-        <li><a href="role.html">Ganti Role</a></li>
-        <li><a href="#" onclick="logout()" style="color: var(--danger);">Logout</a></li>
-      </ul>
+    <div style="max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
+      <h2 style="color:var(--primary);">🏪 Dashboard Penjual</h2>
+      <a href="role.html" style="color:#666; text-decoration:none;">Ganti Role</a>
     </div>
   </nav>
 
   <div class="container">
-    <div style="background: var(--white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px;">
-      <h3>Total Jenis Produk: <span id="totalProductCount" style="color: var(--primary);">0</span></h3>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3>Daftar Produk Toko</h3>
+      <a href="add-product.html" class="btn">+ Tambah Produk</a>
     </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-      <h2>Daftar Produk Toko</h2>
-      <a href="add-product.html" class="btn btn-primary" style="width: auto;">+ Tambah Produk</a>
-    </div>
-
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Gambar</th>
-            <th>Nama Produk</th>
-            <th>Harga</th>
-          </tr>
-        </thead>
-        <tbody id="sellerProductList">
-          <!-- Daftar produk seller -->
-        </tbody>
-      </table>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Gambar</th>
+          <th>Nama</th>
+          <th>Harga</th>
+        </tr>
+      </thead>
+      <tbody id="sellerTable"></tbody>
+    </table>
   </div>
 
-  <script src="js/product.js"></script>
-  <script src="js/login.js"></script>
-  <script src="js/seller.js"></script>
+  <script>
+    function formatRupiah(num) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const defaultProducts = [
+        { id: "1", name: "Berry Acai Bowl", price: 45000, image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=400&q=80" },
+        { id: "2", name: "Banana Acai Bowl", price: 40000, image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=400&q=80" }
+      ];
+      const products = JSON.parse(localStorage.getItem('acai_products')) || defaultProducts;
+      const tbody = document.getElementById('sellerTable');
+      tbody.innerHTML = '';
+      products.forEach(p => {
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"></td>
+            <td><b>${p.name}</b></td>
+            <td>${formatRupiah(p.price)}</td>
+          </tr>
+        `;
+      });
+    });
+  </script>
 </body>
-      </html>
+</html>
