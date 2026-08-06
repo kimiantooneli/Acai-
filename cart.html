@@ -13,14 +13,20 @@
     .brand { color: var(--primary); font-size: 1.3rem; font-weight: bold; text-decoration: none; }
     .container { max-width: 1000px; margin: 20px auto; padding: 15px; }
     table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 20px; }
-    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--primary-light); font-size: 0.9rem; }
-    th { background: var(--primary-light); color: var(--primary); }
-    .btn-danger { background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+    th, td { padding: 14px; text-align: left; border-bottom: 1px solid var(--primary-light); font-size: 0.9rem; }
+    th { background: var(--primary-light); color: var(--primary); font-weight: bold; }
+    .btn-danger { background: var(--danger); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
     .checkout-box { background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; }
-    .btn-checkout { background: var(--primary); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; }
+    .btn-checkout { background: var(--primary); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; }
   </style>
 </head>
 <body>
+  <script>
+    if (!localStorage.getItem('acai_user')) {
+      window.location.href = 'welcome.html';
+    }
+  </script>
+
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="brand">🍓 Acai Bowl Store</a>
@@ -29,7 +35,7 @@
   </nav>
 
   <div class="container">
-    <h2 style="margin-bottom: 15px; color:var(--primary);">🛒 Keranjang Belanja</h2>
+    <h2 style="margin-bottom: 15px; color:var(--primary);">🛒 Keranjang Belanja Anda</h2>
     <div style="overflow-x: auto;">
       <table>
         <thead>
@@ -46,8 +52,8 @@
     </div>
 
     <div class="checkout-box">
-      <h3>Total: <span id="totalPrice" style="color: var(--primary);">Rp 0</span></h3>
-      <a href="checkout.html" class="btn-checkout">Checkout</a>
+      <h3>Total Biaya: <span id="totalPrice" style="color: var(--primary);">Rp 0</span></h3>
+      <a href="checkout.html" class="btn-checkout">Lanjut Checkout</a>
     </div>
   </div>
 
@@ -63,7 +69,7 @@
       tbody.innerHTML = '';
 
       if(cart.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Keranjang kosong</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:30px; color:#888;">Keranjang belanja Anda masih kosong.</td></tr>';
         document.getElementById('totalPrice').textContent = formatRupiah(0);
         return;
       }
@@ -75,8 +81,8 @@
           <tr>
             <td><b>${item.name}</b></td>
             <td>${formatRupiah(item.price)}</td>
-            <td><input type="number" value="${item.qty}" min="1" onchange="updateQty(${index}, this.value)" style="width:50px; padding:4px;"></td>
-            <td>${formatRupiah(sub)}</td>
+            <td><input type="number" value="${item.qty}" min="1" onchange="updateQty(${index}, this.value)" style="width:60px; padding:6px; border:1px solid #ccc; border-radius:6px;"></td>
+            <td><b>${formatRupiah(sub)}</b></td>
             <td><button class="btn-danger" onclick="removeItem(${index})">Hapus</button></td>
           </tr>
         `;
@@ -103,4 +109,4 @@
     document.addEventListener('DOMContentLoaded', renderCart);
   </script>
 </body>
-  </html>
+</html>
