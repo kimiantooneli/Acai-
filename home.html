@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Acai Bowl Store</title>
+  <style>
+    :root { --primary: #9b59b6; --primary-light: #f3e8f9; --bg-soft: #fcf8ff; --white: #ffffff; --text: #333; --danger: #e74c3c; --shadow: 0 4px 15px rgba(155, 89, 182, 0.12); }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background-color: var(--bg-soft); color: var(--text); padding-bottom: 40px; }
+    .navbar { background: var(--white); box-shadow: var(--shadow); padding: 15px; position: sticky; top: 0; z-index: 10; }
+    .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .brand { color: var(--primary); font-size: 1.3rem; font-weight: bold; text-decoration: none; }
+    .nav-links { display: flex; gap: 15px; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; }
+    .badge { background: var(--primary); color: white; padding: 2px 7px; border-radius: 50px; font-size: 0.75rem; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 15px; }
+    .hero { background: linear-gradient(135deg, #e8d8f0, #f3e8f9); border-radius: 16px; padding: 25px; text-align: center; margin-bottom: 20px; border: 2px dashed var(--primary); }
+    .hero h1 { color: var(--primary); font-size: 1.4rem; margin-bottom: 5px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+    .card { background: var(--white); border-radius: 12px; padding: 12px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--primary-light); }
+    .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .card-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; }
+    .card-price { color: var(--primary); font-weight: bold; margin-bottom: 10px; }
+    .btn-add { background: var(--primary); color: white; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="brand">🍓 Acai Bowl Store</a>
+      <ul class="nav-links">
+        <li><a href="home.html" style="color:var(--primary);">Home</a></li>
+        <li><a href="cart.html">Keranjang <span id="cartBadge" class="badge">0</span></a></li>
+        <li><span id="usernameDisplay" style="font-weight:bold; color:var(--primary);">Pembeli</span></li>
+        <li><a href="welcome.html" onclick="localStorage.clear()" style="color:var(--danger);">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Nikmati Kesegaran Acai Bowl! 🍧</h1>
+      <p style="font-size: 0.85rem; color: #666;">Pesan makanan sehat & manis favoritmu sekarang!</p>
+    </div>
+
+    <h3 style="margin-bottom: 15px;">🛍️ Daftar Produk Segar</h3>
+    <div id="productGrid" class="grid"></div>
+  </div>
+
+  <script>
+    // LINK GAMBAR MANGO BARU DAN DIJAMIN AKTIF 100%
+    const defaultProducts = [
+      { id: "1", name: "Berry Acai Bowl", price: 45000, image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=400&q=80" },
+      { id: "2", name: "Banana Acai Bowl", price: 40000, image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=400&q=80" },
+      { id: "3", name: "Mango Acai Bowl", price: 42000, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" },
+      { id: "4", name: "Choco Acai Special", price: 48000, image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" }
+    ];
+
+    function formatRupiah(num) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+    }
+
+    function getProducts() {
+      // PAKSA RESET DATA JIKA PAKAI URL LAMA YANG RUSAK
+      let p = localStorage.getItem('acai_products');
+      if (!p || p.includes('photo-1553279768') || p.includes('photo-1490323814975')) {
+        localStorage.setItem('acai_products', JSON.stringify(defaultProducts));
+        return defaultProducts;
+      }
+      return JSON.parse(p);
+    }
+
+    function render() {
+      const grid = document.getElementById('productGrid');
+      const products = getProducts();
+      grid.innerHTML = '';
+      products.forEach(p => {
+        grid.innerHTML += `
+          <div class="card">
+            <img src="${p.image}" alt="${p.name}">
+            <div>
+              <div class="card-title">${p.name}</div>
+              <div class="card-price">${formatRupiah(p.price)}</div>
+            </div>
+            <button class="btn-add" onclick="addToCart('${p.id}')">+ Keranjang</button>
+          </div>
+        `;
+      });
+    }
+
+    function addToCart(id) {
+      const products = getProducts();
+      const p = products.find(item => item.id === id);
+      let cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
+      const exist = cart.find(item => item.id === id);
+      if(exist) exist.qty += 1;
+      else cart.push({ ...p, qty: 1 });
+      
+      localStorage.setItem('acai_cart', JSON.stringify(cart));
+      updateBadge();
+      alert(p.name + " berhasil masuk ke keranjang!");
+    }
+
+    function updateBadge() {
+      const cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
+      document.getElementById('cartBadge').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('usernameDisplay').textContent = localStorage.getItem('acai_user') || 'Pembeli';
+      render();
+      updateBadge();
+    });
+  </script>
+</body>
+                                                                                       </html>
