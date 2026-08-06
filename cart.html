@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keranjang - Acai Bowl Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="brand-title" style="margin:0;">🍓 Acai Bowl Store</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html" class="active">Keranjang</a></li>
+        <li><a href="#" onclick="logout()" style="color: var(--danger);">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 style="margin-bottom: 20px;">Keranjang Belanja</h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Produk</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+            <th>Subtotal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="cartItems">
+          <!-- Item Keranjang -->
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; background: var(--white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow);">
+      <h3>Total: <span id="cartTotal" style="color: var(--primary);">Rp 0</span></h3>
+      <a href="checkout.html" class="btn btn-primary" style="width: auto; padding: 12px 30px;">Checkout</a>
+    </div>
+  </div>
+
+  <script src="js/product.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+  </html>
