@@ -68,14 +68,14 @@ http
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
     }
 
-     function getProducts() {
-  localStorage.removeItem('acai_products');
-  const p = localStorage.getItem('acai_products');
+     
       if (!p) {
         localStorage.setItem('acai_products', JSON.stringify(defaultProducts));
         return defaultProducts;
       }
-      return JSON.parse(p);
+      return JSON.parse(p);function getProducts() {
+  return defaultProducts;
+    }
     }
 
     function render() {
