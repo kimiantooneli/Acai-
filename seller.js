@@ -12,7 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
       let image = document.getElementById('pImage').value;
 
       if (!image) {
-        image = "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=500&q=80";
+         = "// Berry
+image: "images/berry.jpg"
+
+// Banana
+image: "images/banana.jpg"
+
+// Mango
+image: "images/mango.jpg"
+
+// Choco
+image: "images/choco.jpg";
       }
 
       const products = getProducts();
