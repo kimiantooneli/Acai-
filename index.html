@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko - Acai Bowl Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="brand-title" style="margin:0;">🍓 Acai Bowl Store</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="cart.html">Keranjang <span id="cartBadge" class="cart-count">0</span></a></li>
+        <li><span id="navUsername" style="font-weight: bold; color: var(--primary);">User</span></li>
+        <li><a href="#" onclick="logout()" style="color: var(--danger);">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="hero">
+      <h1>Nikmati Kesegaran Acai Bowl! 🍧</h1>
+      <p>Pesan makanan sehat favoritmu dengan mudah dan cepat.</p>
+    </section>
+
+    <h2 style="margin-bottom: 20px;">Daftar Produk</h2>
+    <div id="productList" class="grid">
+      <!-- Produk di-render dinamis dari JS -->
+    </div>
+  </div>
+
+  <script src="js/product.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
