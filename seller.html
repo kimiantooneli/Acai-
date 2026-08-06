@@ -48,9 +48,17 @@
     }
     document.addEventListener('DOMContentLoaded', () => {
       const defaultProducts = [
-        { id: "1", name: "Berry Acai Bowl", price: 45000, image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=400&q=80" },
-        { id: "2", name: "Banana Acai Bowl", price: 40000, image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=400&q=80" }
-      ];
+        // Berry
+image: "images/berry.jpg"
+
+// Banana
+image: "images/banana.jpg"
+
+// Mango
+image: "images/mango.jpg"
+
+// Choco
+image: "images/choco.jpg"
       const products = JSON.parse(localStorage.getItem('acai_products')) || defaultProducts;
       const tbody = document.getElementById('sellerTable');
       tbody.innerHTML = '';
