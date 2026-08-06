@@ -1,0 +1,54 @@
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();
+  renderSellerProducts();
+
+  const addForm = document.getElementById('addProductForm');
+  if (addForm) {
+    addForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('pName').value;
+      const price = parseInt(document.getElementById('pPrice').value);
+      let image = document.getElementById('pImage').value;
+
+      if (!image) {
+        image = "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=500&q=80";
+      }
+
+      const products = getProducts();
+      const newProduct = {
+        id: Date.now().toString(),
+        name: name,
+        price: price,
+        image: image
+      };
+
+      products.push(newProduct);
+      localStorage.setItem('acai_products', JSON.stringify(products));
+
+      alert("Produk berhasil ditambahkan!");
+      window.location.href = 'seller.html';
+    });
+  }
+});
+
+function renderSellerProducts() {
+  const container = document.getElementById('sellerProductList');
+  const countEl = document.getElementById('totalProductCount');
+  if (!container) return;
+
+  const products = getProducts();
+  if (countEl) countEl.textContent = products.length;
+
+  container.innerHTML = '';
+
+  products.forEach(product => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><img src="${product.image}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;"></td>
+      <td>${product.name}</td>
+      <td>${formatRupiah(product.price)}</td>
+    `;
+    container.appendChild(row);
+  });
+    }
