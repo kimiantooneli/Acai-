@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Acai Bowl Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container" style="max-width: 600px; padding-top: 40px;">
+    <div class="card" style="max-width: 100%; text-align: left;">
+      <h2 class="brand-title" style="text-align: center;">Form Checkout</h2>
+      
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" class="form-control" required placeholder="Nama Anda">
+        </div>
+        <div class="form-group">
+          <label>Alamat Pengiriman</label>
+          <textarea class="form-control" rows="3" required placeholder="Alamat lengkap"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Metode Pembayaran</label>
+          <select class="form-control" required>
+            <option value="cod">COD (Bayar di Tempat)</option>
+            <option value="qris">QRIS / E-Wallet</option>
+            <option value="transfer">Transfer Bank</option>
+          </select>
+        </div>
+
+        <div style="margin: 20px 0; border-top: 1px solid var(--primary-light); padding-top: 15px;">
+          <h3>Ringkasan Pesanan</h3>
+          <ul id="summaryList" style="list-style: none; padding: 10px 0;"></ul>
+          <h4>Total Bayar: <span id="summaryTotal" style="color: var(--primary);">Rp 0</span></h4>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Buat Pesanan</button>
+        <a href="cart.html" class="btn btn-outline" style="margin-top: 10px; display: block;">Batal</a>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/product.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+                                                                                        </html>
