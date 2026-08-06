@@ -26,13 +26,20 @@
   </style>
 </head>
 <body>
+  <script>
+    // Cek apakah pengguna sudah login, jika belum kembalikan ke welcome.html
+    if (!localStorage.getItem('acai_user')) {
+      window.location.href = 'welcome.html';
+    }
+  </script>
+
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="brand">🍓 Acai Bowl Store</a>
       <ul class="nav-links">
         <li><a href="index.html" style="color:var(--primary);">Home</a></li>
         <li><a href="cart.html">Keranjang <span id="cartBadge" class="badge">0</span></a></li>
-        <li><span id="username" style="font-weight:bold; color:var(--primary);">User</span></li>
+        <li><span id="usernameDisplay" style="font-weight:bold; color:var(--primary);">Pembeli</span></li>
         <li><a href="welcome.html" onclick="localStorage.removeItem('acai_user')" style="color:var(--danger);">Logout</a></li>
       </ul>
     </div>
@@ -44,15 +51,16 @@
       <p style="font-size: 0.85rem; color: #666;">Pesan makanan sehat & manis favoritmu sekarang!</p>
     </div>
 
-    <h3 style="margin-bottom: 15px;">🛍️ Daftar Produk</h3>
+    <h3 style="margin-bottom: 15px;">🛍️ Daftar Produk Segar</h3>
     <div id="productGrid" class="grid"></div>
   </div>
 
   <script>
+    // Link Gambar Mango Acai Bowl Sudah Diperbaiki (Gambar Mangga Segar)
     const defaultProducts = [
       { id: "1", name: "Berry Acai Bowl", price: 45000, image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=400&q=80" },
       { id: "2", name: "Banana Acai Bowl", price: 40000, image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=400&q=80" },
-      { id: "3", name: "Mango Acai Bowl", price: 42000, image: "https://images.unsplash.com/photo-1490323814975-758a7283d566?auto=format&fit=crop&w=400&q=80" },
+      { id: "3", name: "Mango Acai Bowl", price: 42000, image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=400&q=80" },
       { id: "4", name: "Choco Acai Special", price: 48000, image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" }
     ];
 
@@ -76,7 +84,7 @@
       products.forEach(p => {
         grid.innerHTML += `
           <div class="card">
-            <img src="${p.image}">
+            <img src="${p.image}" alt="${p.name}">
             <div>
               <div class="card-title">${p.name}</div>
               <div class="card-price">${formatRupiah(p.price)}</div>
@@ -97,7 +105,7 @@
       
       localStorage.setItem('acai_cart', JSON.stringify(cart));
       updateBadge();
-      alert(p.name + " ditambahkan ke keranjang!");
+      alert(p.name + " berhasil masuk ke keranjang!");
     }
 
     function updateBadge() {
@@ -106,7 +114,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('username').textContent = localStorage.getItem('acai_user') || 'Pembeli';
+      document.getElementById('usernameDisplay').textContent = localStorage.getItem('acai_user') || 'Pembeli';
       render();
       updateBadge();
     });
