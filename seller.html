@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Penjual - Acai Bowl Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="brand-title" style="margin:0;">🏪 Penjual Dashboard</div>
+      <ul class="nav-links">
+        <li><a href="seller.html" class="active">Daftar Produk</a></li>
+        <li><a href="add-product.html">Tambah Produk</a></li>
+        <li><a href="role.html">Ganti Role</a></li>
+        <li><a href="#" onclick="logout()" style="color: var(--danger);">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div style="background: var(--white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px;">
+      <h3>Total Jenis Produk: <span id="totalProductCount" style="color: var(--primary);">0</span></h3>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h2>Daftar Produk Toko</h2>
+      <a href="add-product.html" class="btn btn-primary" style="width: auto;">+ Tambah Produk</a>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Gambar</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+          </tr>
+        </thead>
+        <tbody id="sellerProductList">
+          <!-- Daftar produk seller -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/product.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/seller.js"></script>
+</body>
+      </html>
