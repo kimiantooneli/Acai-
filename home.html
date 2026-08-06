@@ -49,31 +49,22 @@
   </div>
 
   <script>
-    // LINK GAMBAR MANGO BARU DAN DIJAMIN AKTIF 100%
-    const defaultProducts = [
+    // LANGSUNG RESET MEMORI LAMA SAAT HALAMAN DIBUKA
+    localStorage.removeItem('acai_products');
+
+    const products = [
       { id: "1", name: "Berry Acai Bowl", price: 45000, image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=400&q=80" },
       { id: "2", name: "Banana Acai Bowl", price: 40000, image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=400&q=80" },
-      { id: "3", name: "Mango Acai Bowl", price: 42000, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" },
-      { id: "4", name: "Choco Acai Special", price: 48000, image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" }
+      { id: "3", name: "Mango Acai Bowl", price: 42000, image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" },
+      { id: "4", name: "Choco Acai Special", price: 48000, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" }
     ];
 
     function formatRupiah(num) {
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
     }
 
-    function getProducts() {
-      // PAKSA RESET DATA JIKA PAKAI URL LAMA YANG RUSAK
-      let p = localStorage.getItem('acai_products');
-      if (!p || p.includes('photo-1553279768') || p.includes('photo-1490323814975')) {
-        localStorage.setItem('acai_products', JSON.stringify(defaultProducts));
-        return defaultProducts;
-      }
-      return JSON.parse(p);
-    }
-
     function render() {
       const grid = document.getElementById('productGrid');
-      const products = getProducts();
       grid.innerHTML = '';
       products.forEach(p => {
         grid.innerHTML += `
@@ -90,7 +81,6 @@
     }
 
     function addToCart(id) {
-      const products = getProducts();
       const p = products.find(item => item.id === id);
       let cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
       const exist = cart.find(item => item.id === id);
@@ -114,4 +104,4 @@
     });
   </script>
 </body>
-                                                                                       </html>
+</html>
