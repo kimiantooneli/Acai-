@@ -4,25 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Acai Bowl Store</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --primary: #9b59b6;
+      --primary-light: #e8d8f0;
+      --bg-soft: #fcf8ff;
+      --white: #ffffff;
+      --shadow: 0 4px 15px rgba(155, 89, 182, 0.15);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background: linear-gradient(135deg, var(--primary-light), var(--bg-soft)); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .card { background: var(--white); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; max-width: 380px; text-align: center; }
+    .title { color: var(--primary); margin-bottom: 20px; font-size: 1.6rem; }
+    .form-group { margin-bottom: 15px; text-align: left; }
+    .form-group label { display: block; font-size: 0.85rem; color: #666; margin-bottom: 5px; }
+    .form-control { width: 100%; padding: 12px; border: 2px solid var(--primary-light); border-radius: 10px; outline: none; }
+    .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+  </style>
 </head>
 <body>
-  <div class="auth-container">
-    <div class="card">
-      <h1 class="brand-title">🍓 Acai Bowl Store</h1>
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" class="form-control" required placeholder="Masukkan username">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" class="form-control" required placeholder="Masukkan password">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-    </div>
+  <div class="card">
+    <h1 class="title">🍓 Acai Bowl Store</h1>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" class="form-control" required placeholder="Masukkan username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" class="form-control" required placeholder="Masukkan password">
+      </div>
+      <button type="submit" class="btn">Login</button>
+    </form>
   </div>
-  <script src="js/login.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      if(u) {
+        localStorage.setItem('acai_user', u);
+        window.location.href = 'role.html';
+      }
+    });
+  </script>
 </body>
 </html>
