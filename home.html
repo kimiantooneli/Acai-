@@ -1,125 +1,488 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Acai Bowl Store</title>
-  <style>
-    :root { --primary: #9b59b6; --primary-light: #f3e8f9; --bg-soft: #fcf8ff; --white: #ffffff; --text: #333; --danger: #e74c3c; --shadow: 0 4px 15px rgba(155, 89, 182, 0.12); }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-    body { background-color: var(--bg-soft); color: var(--text); padding-bottom: 40px; }
-    .navbar { background: var(--white); box-shadow: var(--shadow); padding: 15px; position: sticky; top: 0; z-index: 10; }
-    .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .brand { color: var(--primary); font-size: 1.3rem; font-weight: bold; text-decoration: none; }
-    .nav-links { display: flex; gap: 15px; list-style: none; align-items: center; }
-    .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; }
-    .badge { background: var(--primary); color: white; padding: 2px 7px; border-radius: 50px; font-size: 0.75rem; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 15px; }
-    .hero { background: linear-gradient(135deg, #e8d8f0, #f3e8f9); border-radius: 16px; padding: 25px; text-align: center; margin-bottom: 20px; border: 2px dashed var(--primary); }
-    .hero h1 { color: var(--primary); font-size: 1.4rem; margin-bottom: 5px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-    .card { background: var(--white); border-radius: 12px; padding: 12px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--primary-light); }
-    .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-    .card-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; }
-    .card-price { color: var(--primary); font-weight: bold; margin-bottom: 10px; }
-    .btn-add { background: var(--primary); color: white; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Home - Acai Bowl Store</title>
+
+<style>
+
+:root{
+
+--primary:#9b59b6;
+--primary-dark:#7d3c98;
+--primary-light:#f3e8f9;
+--bg:#fcf8ff;
+--white:#ffffff;
+--text:#333;
+--danger:#e74c3c;
+--shadow:0 4px 15px rgba(155,89,182,.15);
+
+}
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+
+}
+
+body{
+
+background:var(--bg);
+color:var(--text);
+
+}
+
+.navbar{
+
+background:var(--white);
+padding:15px 25px;
+box-shadow:var(--shadow);
+position:sticky;
+top:0;
+z-index:100;
+
+}
+
+.nav-container{
+
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.brand{
+
+text-decoration:none;
+font-size:24px;
+font-weight:bold;
+color:var(--primary);
+
+}
+
+.nav-links{
+
+display:flex;
+gap:18px;
+align-items:center;
+list-style:none;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+font-weight:bold;
+color:#444;
+
+}
+
+.nav-links a:hover{
+
+color:var(--primary);
+
+}
+
+.badge{
+
+background:var(--primary);
+color:white;
+padding:3px 8px;
+border-radius:50px;
+font-size:12px;
+
+}
+
+.container{
+
+max-width:1200px;
+margin:auto;
+padding:20px;
+
+}
+
+.hero{
+
+background:linear-gradient(135deg,#eadcff,#f8efff);
+border-radius:20px;
+padding:40px;
+text-align:center;
+margin-bottom:30px;
+
+}
+
+.hero h1{
+
+font-size:36px;
+color:var(--primary);
+margin-bottom:10px;
+
+}
+
+.hero p{
+
+color:#666;
+
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:var(--shadow);
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card img{
+
+width:100%;
+height:180px;
+object-fit:cover;
+
+}
+
+.card-body{
+
+padding:15px;
+
+}
+
+.card-title{
+
+font-size:18px;
+font-weight:bold;
+margin-bottom:8px;
+
+}
+
+.card-price{
+
+color:var(--primary);
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px;
+
+}
+
+.btn-add{
+
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:var(--primary);
+color:white;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+.btn-add:hover{
+
+background:var(--primary-dark);
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="home.html" class="brand">🍓 Acai Bowl Store</a>
-      <ul class="nav-links">
-        <li><a href="home.html" style="color:var(--primary);">Home</a></li>
-        <li><a href="cart.html">Keranjang <span id="cartBadge" class="badge">0</span></a></li>
-        <li><span id="usernameDisplay" style="font-weight:bold; color:var(--primary);">Pembeli</span></li>
-        <li><a href="welcome.html" onclick="localStorage.clear()" style="color:var(--danger);">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <div class="container">
-    <div class="hero">
-      <h1>Nikmati Kesegaran Acai Bowl! 🍧</h1>
-      <p style="font-size: 0.85rem; color: #666;">Pesan makanan sehat & manis favoritmu sekarang!</p>
-    </div>
+<nav class="navbar">
 
-    <h3 style="margin-bottom: 15px;">🛍️ Daftar Produk Segar</h3>
-    <div id="productGrid" class="grid"></div>
-  </div>
+<div class="nav-container">
 
-  <script>
-    // MENGGUNAKAN GAMBAR EMBEDDED LOKAL LENGKAP - ANTI GAGAL DARI NETWORK
-    const products = [
-      { 
-        id: "1", 
-        name: "Berry Acai Bowl", 
-        price: 45000, 
-        image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=400&q=80" 
-      },
-      { 
-        id: "2", 
-        name: "Banana Acai Bowl", 
-        price: 40000, 
-        image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=400&q=80" 
-      },
-      { 
-        id: "3", 
-        name: "Mango Acai Bowl", 
-        price: 42000, 
-        image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23FFE082'/><circle cx='200' cy='150' r='90' fill='%23FFB300'/><circle cx='200' cy='150' r='75' fill='%238E24AA'/><circle cx='180' cy='130' r='20' fill='%23FFEB3B'/><circle cx='220' cy='160' r='18' fill='%23FF8F00'/><text x='50%25' y='88%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='22' fill='%235D4037'>🥭 Mango Acai Bowl</text></svg>" 
-      },
-      { 
-        id: "4", 
-        name: "Choco Acai Special", 
-        price: 48000, 
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" 
-      }
-    ];
+<a href="home.html" class="brand">
 
-    function formatRupiah(num) {
-      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
-    }
+🍓 Acai Bowl Store
 
-    function render() {
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
-      products.forEach(p => {
-        grid.innerHTML += `
-          <div class="card">
-            <img src="${p.image}" alt="${p.name}">
-            <div>
-              <div class="card-title">${p.name}</div>
-              <div class="card-price">${formatRupiah(p.price)}</div>
-            </div>
-            <button class="btn-add" onclick="addToCart('${p.id}')">+ Keranjang</button>
-          </div>
-        `;
-      });
-    }
+</a>
 
-    function addToCart(id) {
-      const p = products.find(item => item.id === id);
-      let cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
-      const exist = cart.find(item => item.id === id);
-      if(exist) exist.qty += 1;
-      else cart.push({ ...p, qty: 1 });
-      
-      localStorage.setItem('acai_cart', JSON.stringify(cart));
-      updateBadge();
-      alert(p.name + " berhasil masuk ke keranjang!");
-    }
+<ul class="nav-links">
 
-    function updateBadge() {
-      const cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
-      document.getElementById('cartBadge').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-    }
+<li>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('usernameDisplay').textContent = localStorage.getItem('acai_user') || 'Pembeli';
-      render();
-      updateBadge();
-    });
-  </script>
+<a href="home.html">
+
+Home
+
+</a>
+
+</li>
+
+<li>
+
+<a href="cart.html">
+
+Keranjang
+
+<span id="cartBadge" class="badge">
+
+0
+
+</span>
+
+</a>
+
+</li>
+
+<li>
+
+<span id="usernameDisplay">
+
+Pembeli
+
+</span>
+
+</li>
+
+<li>
+
+<a href="welcome.html"
+
+onclick="localStorage.clear()"
+
+style="color:#e74c3c;">
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="hero">
+
+<h1>
+
+🍧 Fresh Acai Bowl Every Day
+
+</h1>
+
+<p>
+
+Healthy • Fresh • Delicious • Pastel Edition 💜
+
+</p>
+
+</div>
+
+<h2 style="margin-bottom:20px;">
+
+Produk Terlaris
+
+</h2>
+
+<div
+
+id="productGrid"
+
+class="grid">
+
+</div>
+
+</div>
+<script>
+
+const products = [
+
+{
+id:"1",
+name:"Berry Acai Bowl",
+price:45000,
+image:"images/berry.jpg"
+},
+
+{
+id:"2",
+name:"Banana Acai Bowl",
+price:40000,
+image:"images/banana.jpg"
+},
+
+{
+id:"3",
+name:"Mango Acai Bowl",
+price:42000,
+image:"images/mango.jpg"
+},
+
+{
+id:"4",
+name:"Choco Acai Special",
+price:48000,
+image:"images/choco.jpg"
+}
+
+];
+
+function formatRupiah(number){
+
+return new Intl.NumberFormat(
+'id-ID',
+{
+style:'currency',
+currency:'IDR',
+maximumFractionDigits:0
+}
+).format(number);
+
+}
+
+function renderProducts(){
+
+const grid=document.getElementById("productGrid");
+
+grid.innerHTML="";
+
+products.forEach(product=>{
+
+grid.innerHTML+=`
+
+<div class="card">
+
+<img
+src="${product.image}"
+alt="${product.name}"
+onerror="this.src='images/default.jpg'">
+
+<div class="card-body">
+
+<div class="card-title">
+
+${product.name}
+
+</div>
+
+<div class="card-price">
+
+${formatRupiah(product.price)}
+
+</div>
+
+<button
+class="btn-add"
+onclick="addToCart('${product.id}')">
+
++ Keranjang
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function addToCart(id){
+
+const product=products.find(item=>item.id===id);
+
+let cart=JSON.parse(
+localStorage.getItem("acai_cart")
+)||[];
+
+const exist=cart.find(item=>item.id===id);
+
+if(exist){
+
+exist.qty++;
+
+}else{
+
+cart.push({
+
+...product,
+
+qty:1
+
+});
+
+}
+
+localStorage.setItem(
+
+"acai_cart",
+
+JSON.stringify(cart)
+
+);
+
+updateBadge();
+
+alert(product.name+" berhasil masuk ke keranjang 🛒");
+
+}
+
+function updateBadge(){
+
+const cart=JSON.parse(
+
+localStorage.getItem("acai_cart")
+
+)||[];
+
+const total=cart.reduce((sum,item)=>sum+item.qty,0);
+
+document.getElementById("cartBadge").textContent=total;
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const username=localStorage.getItem("acai_user");
+
+if(username){
+
+document.getElementById("usernameDisplay").textContent=username;
+
+}
+
+renderProducts();
+
+updateBadge();
+
+});
+
+</script>
+
 </body>
+
 </html>
